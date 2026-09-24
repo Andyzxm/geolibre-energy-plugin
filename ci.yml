@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      # The bundle is what gets submitted to the registry, so a build that
+      # silently produces nothing should fail here rather than in review.
+      - name: Check the bundle exists
+        run: test -s geolibre-plugin/dist/index.js && test -s geolibre-plugin/dist/style.css

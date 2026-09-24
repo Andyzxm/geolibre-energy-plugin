@@ -1,0 +1,35 @@
+{
+  "name": "geolibre-energy-plugin",
+  "version": "1.0.0",
+  "description": "Energy Data: a curated catalog of U.S. energy datasets, as a GeoLibre plugin.",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "scripts": {
+    "build": "tsc --noEmit && vite build --config vite.geolibre.config.ts",
+    "package": "npm run build && node scripts/package-geolibre-plugin.mjs",
+    "serve": "node scripts/serve-geolibre-plugin.mjs",
+    "test": "node --import tsx --test tests/*.test.ts"
+  },
+  "keywords": [
+    "geolibre",
+    "geolibre-plugin",
+    "energy",
+    "gis",
+    "maplibre"
+  ],
+  "author": "Xinming Andy Zhang",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Andyzxm/geolibre-energy-plugin"
+  },
+  "devDependencies": {
+    "@types/geojson": "^7946.0.16",
+    "@types/node": "^25.9.2",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.16"
+  }
+}

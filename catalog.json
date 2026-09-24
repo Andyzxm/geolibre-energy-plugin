@@ -1,0 +1,259 @@
+{
+  "version": 1,
+  "title": "Geoenergy Data Library",
+  "groups": [
+    {
+      "id": "generation",
+      "label": "Generation",
+      "description": "Where electricity and fuel are produced.",
+      "datasets": [
+        {
+          "id": "eia-power-plants",
+          "title": "U.S. Power Plants",
+          "description": "Operable electric generating plants of 1 MW or more, attributed by primary fuel, nameplate capacity, and operator.",
+          "kind": "arcgis-feature",
+          "url": "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Power_Plants_in_the_US/FeatureServer/0",
+          "source": "EIA",
+          "infoUrl": "https://atlas.eia.gov/",
+          "tags": [
+            "generation",
+            "plants",
+            "capacity",
+            "fuel",
+            "points"
+          ],
+          "maxFeatures": 2500,
+          "bounds": [
+            -179.0,
+            17.0,
+            -65.0,
+            72.0
+          ]
+        },
+        {
+          "id": "eia-power-plants-hexbins",
+          "title": "Power Plants by Hexagon Bin",
+          "description": "Plant counts and capacity aggregated to hexagons \u2014 a national overview that draws without loading every plant.",
+          "kind": "arcgis-feature",
+          "url": "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Aggregation_of_Power_Plants_in_the_U_S__by_hexagon_bins/FeatureServer/0",
+          "source": "EIA",
+          "tags": [
+            "generation",
+            "aggregate",
+            "hexbin",
+            "density"
+          ],
+          "maxFeatures": 4000
+        },
+        {
+          "id": "eia-coal-mines",
+          "title": "Coal Mines",
+          "description": "Surface and underground coal mines, with mine type, status, and production.",
+          "kind": "arcgis-feature",
+          "url": "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Surface_and_Underground_Coal_Mines_in_the_US/FeatureServer/0",
+          "source": "EIA",
+          "tags": [
+            "coal",
+            "mining",
+            "fossil",
+            "appalachia",
+            "points"
+          ],
+          "maxFeatures": 4000
+        }
+      ],
+      "accent": "hsl(24 88% 50%)"
+    },
+    {
+      "id": "delivery",
+      "label": "Transmission and Delivery",
+      "description": "The wires and the substations between generation and load.",
+      "datasets": [
+        {
+          "id": "eia-transmission-lines",
+          "title": "Electric Power Transmission Lines",
+          "description": "Transmission line routes at 69 kV and above, attributed by voltage class and owner.",
+          "kind": "arcgis-feature",
+          "url": "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/US_Electric_Power_Transmission_Lines/FeatureServer/0",
+          "source": "EIA",
+          "infoUrl": "https://atlas.eia.gov/",
+          "tags": [
+            "transmission",
+            "grid",
+            "topology",
+            "lines",
+            "voltage"
+          ],
+          "maxFeatures": 1500
+        },
+        {
+          "id": "electric-substations",
+          "title": "Electric Substations",
+          "description": "Substations with maximum and minimum voltage, line count, and operating status.",
+          "kind": "arcgis-feature",
+          "url": "https://services5.arcgis.com/HDRa0B57OVrv2E1q/ArcGIS/rest/services/Electric_Substations/FeatureServer/0",
+          "source": "HIFLD",
+          "tags": [
+            "substation",
+            "grid",
+            "nodes",
+            "voltage",
+            "points"
+          ],
+          "maxFeatures": 5000
+        }
+      ],
+      "accent": "hsl(43 89% 45%)"
+    },
+    {
+      "id": "demand",
+      "label": "Demand and Load Growth",
+      "description": "Where new electricity demand is landing.",
+      "accent": "hsl(280 55% 55%)",
+      "datasets": [
+        {
+          "id": "im3-data-centers",
+          "title": "Data Centers",
+          "description": "1,382 operating U.S. data centers with operator, county, and floor area, from PNNL's IM3 Open Source Data Center Atlas.",
+          "kind": "geojson",
+          "url": "https://raw.githubusercontent.com/IMMM-SFA/datacenter-atlas/main/static/im3_datacenter_centroids.geojson",
+          "source": "PNNL IM3",
+          "infoUrl": "https://immm-sfa.github.io/datacenter-atlas/",
+          "tags": [
+            "data center",
+            "demand",
+            "load growth",
+            "hyperscale",
+            "points"
+          ],
+          "bounds": [
+            -125.0,
+            24.0,
+            -66.0,
+            50.0
+          ]
+        },
+        {
+          "id": "im3-data-center-footprints",
+          "title": "Data Center Footprints",
+          "description": "Building footprints for the same sites, for anything that needs area rather than a point.",
+          "kind": "geojson",
+          "url": "https://raw.githubusercontent.com/IMMM-SFA/datacenter-atlas/main/static/im3_datacenter_footprints.geojson",
+          "source": "PNNL IM3",
+          "infoUrl": "https://immm-sfa.github.io/datacenter-atlas/",
+          "tags": [
+            "data center",
+            "footprint",
+            "polygons",
+            "demand"
+          ],
+          "bounds": [
+            -125.0,
+            24.0,
+            -66.0,
+            50.0
+          ]
+        },
+        {
+          "id": "im3-projected-growth-moderate",
+          "title": "Projected Growth (moderate scenario)",
+          "description": "Where IM3's market-gravity model places new data center capacity under a moderate growth scenario. Modeled, not observed.",
+          "kind": "geojson",
+          "url": "https://raw.githubusercontent.com/IMMM-SFA/datacenter-atlas/main/static/projected/moderate_growth_50_market_gravity_epsg4326_centroids.geojson",
+          "source": "PNNL IM3",
+          "infoUrl": "https://immm-sfa.github.io/datacenter-atlas/",
+          "vintage": "modeled",
+          "tags": [
+            "data center",
+            "projection",
+            "load growth",
+            "scenario",
+            "points"
+          ],
+          "bounds": [
+            -125.0,
+            24.0,
+            -66.0,
+            50.0
+          ]
+        },
+        {
+          "id": "osm-data-centers",
+          "title": "Data Centers (OpenStreetMap, live)",
+          "description": "A live OpenStreetMap query for the visible map, useful for sites newer than the IM3 atlas. Zoom to a metro area first, and expect the public query servers to be busy at times.",
+          "kind": "overpass",
+          "url": "https://overpass-api.de/api/interpreter",
+          "query": "nwr[\"telecom\"=\"data_center\"]({{bbox}});nwr[\"building\"=\"data_center\"]({{bbox}});nwr[\"man_made\"=\"data_center\"]({{bbox}});",
+          "source": "OpenStreetMap",
+          "infoUrl": "https://wiki.openstreetmap.org/wiki/Tag:telecom%3Ddata_center",
+          "vintage": "live",
+          "tags": [
+            "data center",
+            "demand",
+            "load growth",
+            "hyperscale",
+            "points"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fuels",
+      "label": "Fuels and Pipelines",
+      "description": "Movement of gas and liquid fuels.",
+      "datasets": [
+        {
+          "id": "eia-natural-gas-pipelines",
+          "title": "Natural Gas Pipelines",
+          "description": "Interstate and intrastate natural gas transmission pipelines.",
+          "kind": "arcgis-feature",
+          "url": "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Natural_Gas_Interstate_and_Intrastate_Pipelines_1/FeatureServer/0",
+          "source": "EIA",
+          "tags": [
+            "natural gas",
+            "pipeline",
+            "fuel",
+            "lines"
+          ],
+          "maxFeatures": 4000
+        },
+        {
+          "id": "eia-crude-oil-pipelines",
+          "title": "Crude Oil Trunk Pipelines",
+          "description": "Major crude oil trunk lines moving production to refineries.",
+          "kind": "arcgis-feature",
+          "url": "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Crude_Oil_Trunk_Pipelines_1/FeatureServer/0",
+          "source": "EIA",
+          "tags": [
+            "crude oil",
+            "pipeline",
+            "petroleum",
+            "lines"
+          ],
+          "maxFeatures": 4000
+        },
+        {
+          "id": "eia-petroleum-product-pipelines",
+          "title": "Petroleum Product Pipelines",
+          "description": "Refined product pipelines carrying gasoline, diesel, and jet fuel.",
+          "kind": "arcgis-feature",
+          "url": "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Petroleum_Products_Pipelines_1/FeatureServer/0",
+          "source": "EIA",
+          "tags": [
+            "petroleum",
+            "pipeline",
+            "refined products",
+            "lines"
+          ],
+          "maxFeatures": 4000
+        }
+      ],
+      "accent": "hsl(199 70% 45%)"
+    }
+  ],
+  "defaultLayers": [
+    "eia-power-plants",
+    "eia-transmission-lines",
+    "im3-data-centers"
+  ]
+}

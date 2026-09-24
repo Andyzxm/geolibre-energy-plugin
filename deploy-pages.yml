@@ -1,0 +1,53 @@
+name: Publish the plugin bundle
+
+# The registry entry points at this site's plugin.json rather than a copy
+# inside opengeos/geolibre-plugins, so this workflow is what actually ships a
+# release: GeoLibre fetches the manifest from here and resolves `entry` and
+# `style` relative to it.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      # Publish the bundle folder as-is: plugin.json at the root, with
+      # dist/index.js and dist/style.css beside it, which is the layout the
+      # manifest's relative paths already describe.
+      - name: Check the bundle
+        run: |
+          test -s geolibre-plugin/plugin.json
+          test -s geolibre-plugin/dist/index.js
+          test -s geolibre-plugin/dist/style.css
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: geolibre-plugin
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
